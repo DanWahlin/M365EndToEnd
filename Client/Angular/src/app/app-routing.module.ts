@@ -5,9 +5,9 @@ import { CanActivateGuard } from './core/guards/can-activate.guard';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'customers' },
-  { path: 'customers', loadChildren: () => import('./customers/customers.module').then(m => m.CustomersModule) },
-  { path: 'orders/:id', loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule) },
-  { path: 'settings', component: UserSettingsComponent },
+  { path: 'customers', loadChildren: () => import('./customers/customers.module').then(m => m.CustomersModule), canActivate: [CanActivateGuard] },
+  { path: 'orders/:id', loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule), canActivate: [CanActivateGuard] },
+  { path: 'settings', component: UserSettingsComponent, canActivate: [CanActivateGuard] },
   { path: 'teams-config', loadChildren: () => import('./teams-config/teams-config.module').then(m => m.TeamsConfigModule) },
   { path: '**', pathMatch: 'full', redirectTo: '/customers' } // catch any unfound routes and redirect to home page
 ];
