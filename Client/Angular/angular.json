@@ -27,6 +27,7 @@
               "node_modules/primeng/resources/primeng.min.css"],
             "scripts": [],
             "allowedCommonJsDependencies": [
+              "minimatch",
               "@codewithdan/observable-store",
               "@codewithdan/observable-store-extensions"
            ]

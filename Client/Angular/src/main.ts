@@ -4,7 +4,6 @@ import { NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { environment } from './environments/environment';
-import { AppDevModule } from './app/app-dev.module';
 import { AppModule } from './app/app.module';
 import { ObservableStore } from '@codewithdan/observable-store';
 import { ReduxDevToolsExtension } from '@codewithdan/observable-store-extensions';
