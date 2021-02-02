@@ -73,7 +73,7 @@ domain = 'devappsforteams.local';
 
 1. Obtain your Microsoft 365 tenant ID. This indicates the Azure AD instance that is used by your Microsoft 365 tenant. To obtain the Microsoft 365 tenant ID, browse to [https://admin.microsoft.com](https://admin.microsoft.com/?WT.mc_id=m365-11189-cxa), log in with your development M365 account, and then browse to the Azure Active Directory option on the left. The Tenant ID on the overview page contains the tenant ID you need to use in your `az login` command.
 
-![Tenant ID must match](./docs/images/TenantIDMatch.png)
+![Tenant ID must match](./Setup/Docs/images/TenantIDMatch.png)
 
 > NOTE: If the Azure subscription you plan to use is associated with a different tenant ID, you will need to change it so both the Azure services and M365 are using the same Azure AD instance. Note that this change is likely to break other solutions already deployed in the Azure subscription, so if there are other solutions already in use, you'll want to obtain another Azure subscription and associate it with your M365 tenant. For detailed instructions, follow [this blog article](https://laurakokkarinen.com/how-to-use-the-complimentary-azure-credits-in-a-microsoft-365-developer-tenant-step-by-step) from MVP [Laura Kokkarinen](https://twitter.com/laurakokkarinen). 
 
@@ -157,31 +157,31 @@ Two Azure Cognitive Services, LUIS (Language Understanding Intelligent Services)
 
 2. Select the arrow on the right side of the `New app` button and choose `Import as JSON`.
 
-![Import the LUIS model](./docs/images/LUIS-1.png)
+![Import the LUIS model](./Setup/Docs/images/LUIS-1.png)
 
 [Import](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-how-to-manage-versions?WT.mc_id=m365-11189-cxa#import-version) `'TailwindLuis.json'` file available under **Teams > services > CognitiveServices** folder. Give your model a name and click "Done" to import the model.
 
-![Import the LUIS model](./docs/images/LUIS-2.png)
+![Import the LUIS model](./Setup/Docs/images/LUIS-2.png)
 
 3. You will see a list of the _intents_ the Bot can respond to. Train your LUIS model by choosing `Train` on the top right. 
 
-![Train the LUIS model](./docs/images/LUIS-3.png)
+![Train the LUIS model](./Setup/Docs/images/LUIS-3.png)
 
 4. Test your LUIS model by choosing `Test` and try using the following uttarances as an example, "Hi", "Can you help?" and "Get me my customer list" to see the intent results. For these test cases, the most probable intents should be "Greeting", "Help", and "Customers" respectively.
 
-![Test the LUIS model](./docs/images/LUIS-4.png)
+![Test the LUIS model](./Setup/Docs/images/LUIS-4.png)
 
 5. Publish your LUIS model by selecting `Publish` 1️⃣. Select `Production slot` 2️⃣ and `Done` 3️⃣.
 
-![Publish the LUIS model](./docs/images/LUIS-5.png)
+![Publish the LUIS model](./Setup/Docs/images/LUIS-5.png)
 
 6. Go to **Manage** on the top right and then **Azure resources** tab. Select `Add prediction resource`.
 
-![Set up a LUIS prediction resource](./docs/images/LUIS-6.png)
+![Set up a LUIS prediction resource](./Setup/Docs/images/LUIS-6.png)
 
 If you have a prediction resource, you can choose it here. If not, click the `Create a new prediction resource` link on the bottom.
 
-![Set up a LUIS prediction resource](./docs/images/LUIS-7.png)
+![Set up a LUIS prediction resource](./Setup/Docs/images/LUIS-7.png)
 
 If you are creating a new prediction resource, fill the fields as the following and click `Done`:
 
@@ -192,11 +192,11 @@ If you are creating a new prediction resource, fill the fields as the following 
 
 7. Save the `Endpoint URL` 1️⃣ and `Primary Key` 2️⃣ somewhere for future use.
 
-![Copy LUIS info for .env file](./docs/images/LUIS-8.png)
+![Copy LUIS info for .env file](./Setup/Docs/images/LUIS-8.png)
 
 Then switch to the Setup tab 1️⃣ and save the `App ID` 2️⃣.
 
-![Copy LUIS info for .env file](./docs/images/LUIS-9.png)
+![Copy LUIS info for .env file](./Setup/Docs/images/LUIS-9.png)
 
 8. Open the project in your code editor. In the /teams folder, copy the `.env sample` file to a new file called `.env`. Add the following fields to your `/teams/.env` file:
 
@@ -215,7 +215,7 @@ Two Azure Cognitive Services, LUIS (Language Understanding Intelligent Services)
 Go to [QnA Maker Portal](https://www.qnamaker.ai/?WT.mc_id=m365-11189-cxa) and select `Sign in` from top right. Sign in with your Azure admin account.
 Click on `Create a knowledge base` on the top 1️⃣ and complete the steps shown on the screen 2️⃣.
 
-![Create a Knowledge Base](./docs/images/QnA-1.png)
+![Create a Knowledge Base](./Setup/Docs/images/QnA-1.png)
 
 * **STEP 1**:If you already have a QnA service, you can skip this step. If you don't already have a QnA service, you'll need to create one now, click `Create a QnA Service`. You will be directed to [Azure Portal](https://portal.azure.com/?WT.mc_id=m365-11189-cxa) and login with the same account. Fill the fields as follows and select `Review + create`, then `Create`:
 
@@ -242,7 +242,7 @@ Click on `Create a knowledge base` on the top 1️⃣ and complete the steps sho
 
 * **STEP 4:** Populate your knowledge base by selecting `+ Add file` link 1️⃣ and in the `services > CognitiveServices` folder 2️⃣ choose `TailwindQnAMaker.csv` 3️⃣ and click `Open` 4️⃣. Leave te **Chit-chat** radio buttons set to `None` 5️⃣ (the chit-chat messages are already built into the knowledge base you imported).
 
-![Create a Knowledge Base](./docs/images/QnA-2.png)
+![Create a Knowledge Base](./Setup/Docs/images/QnA-2.png)
 
 * **Step 5:** Select `Create your KB`.
 
@@ -252,7 +252,7 @@ Note: If you chose the free options when setting up QnA and get a message about 
 
 1. Select `Save and train` on the top right. 
 
-![Create a Knowledge Base](./docs/images/QnA-3.png)
+![Create a Knowledge Base](./Setup/Docs/images/QnA-3.png)
 
 1. Click on `Test` in the top navigation bar and test your knowledge base by asking questions as the following examples: "How old are you?", "Do you breathe?", "Can you dream?".
 
@@ -261,7 +261,7 @@ Note: If you chose the free options when setting up QnA and get a message about 
 
 6. Under the **Postman** tab, copy your `KnowledgeBase-ID` from /knowledgebases/`xxxx-xxxxx-xxxx`/generateAnswer 1️⃣; also copy `Host` 2️⃣ and `Authorization: EndpointKey` 3️⃣. 
 
-![Create a Knowledge Base](./docs/images/QnA-4.png)
+![Create a Knowledge Base](./Setup/Docs/images/QnA-4.png)
 
 Add the values to the `\teams\.env` file:
 
@@ -311,15 +311,15 @@ npm run start
 
 Click Create to create the Bot channel registration.
 
-![Register your bot](./docs/images/BotChannel-1.png)
+![Register your bot](./Setup/Docs/images/BotChannel-1.png)
 
 2. Go to your **Bot Channels Registration** resource and select `Channels` from left-hand side menu 1️⃣. Choose `Microsoft Teams` icon to enable Teams as a channel 2️⃣. Agree to the terms of service and `Save`.
 
-![Register your bot](./docs/images/BotChannel-2.png)
+![Register your bot](./Setup/Docs/images/BotChannel-2.png)
 
 3. Go to **Settings** from left-hand side menu 1️⃣ and find `Microsoft App ID` and click on `Manage` link 2️⃣.
 
-![Register your bot](./docs/images/BotChannel-3.png)
+![Register your bot](./Setup/Docs/images/BotChannel-3.png)
 
 Clicking this link will bring you out of the Bot Channel Registration resource and into Azure AD, where you are now editing the Azure AD app registration that's used by the bot. The Azure Bot Channel you just created will use this application to authenticate itself to your bot. The App ID of this application is often referred to as the Bot ID; they are one and the same.
 
@@ -329,11 +329,11 @@ You will land in the **Certificates & secrets** section of this app registration
 
 > NOTE: You won't be able to copy or view the client secret once you leave this screen, but you can always creae a new one.
 
-![Register your bot](./docs/images/BotChannel-4.png)
+![Register your bot](./Setup/Docs/images/BotChannel-4.png)
 
 5. Go to **Overview** 1️⃣, and copy `Application (Client) ID` 2️⃣. 
 
-![Register your bot](./docs/images/BotChannel-5.png)
+![Register your bot](./Setup/Docs/images/BotChannel-5.png)
 
 6. Add the following fields in `.env` file:
 
@@ -363,7 +363,7 @@ Now, your project is running on https://localhost:3978 which you've been tunneli
 
 1. Within Teams, click "Chat" in the left sidebar 1️⃣, then click the New Message button 2️⃣. Paste the Bot ID (Bot's App ID obtained in section 2.3) into the To: box 3️⃣. Teams should find the bot name and show it in a pop-up 4️⃣; click the popup to begin conversing with the Bot. Type a test message into the compose area 5️⃣ and click Send.
 
-![Test your bot](./docs/images/BotChannel-6.png)
+![Test your bot](./Setup/Docs/images/BotChannel-6.png)
 
 1. Try saying some of these things to your new Bot:
 
@@ -422,17 +422,17 @@ Now, your project is running on https://localhost:3978 which you've been tunneli
 
 2. From the left rail, select **Apps** 1️⃣. Open the **Upload a custom app** menu 2️⃣and in the submenu choose `Upload for <your-organization>` 3️⃣
 
-![Install app](./docs/images/Package-1.png)
+![Install app](./Setup/Docs/images/Package-1.png)
 
 3. In the file dialog, select the generated `Manifest/CustomerOrders.zip` file
 
 4. In the list of apps, select the newly added app 
 
-![Install app](./docs/images/Package-2.png)
+![Install app](./Setup/Docs/images/Package-2.png)
 
 5. in the app's dialog, choose **Add** 1️⃣ to install the solution as a personal app (just for you). To install the solution in a Team or Group Conversation, click the arrow next to **Add** 2️⃣ and then select team or conversation 2️⃣.
 
-![Install app](./docs/images/Package-3.png)
+![Install app](./Setup/Docs/images/Package-3.png)
 
 A dialog box will be displayed where you can select the channel or group conversation where you'd like to install the app.
 
