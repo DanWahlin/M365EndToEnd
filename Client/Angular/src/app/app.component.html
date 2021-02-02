@@ -1,16 +1,40 @@
-<header class="navbar fixed-top">
-    <nav class="container">
+<!-- <header class="navbar fixed-top"> -->
+    <!-- <nav class="container">
         <div>
           <span class="navbar-brand"><a routerLink="/customers" class="white">Customers App</a></span>
         </div>
         <div class="d-flex">
             <span class="preferred-name">Welcome {{ (userSettings$ | async)?.preferredName }}!</span>
+            <a class="preferred-name" routerLinkActive="active" *ngIf="isLoggedIn" (click)="logout()" data-cy="login-logout">Logout</a>
             <a routerLink="/settings" class="p-2 settings">
                 <i class="fas fa-cog" aria-hidden="true"></i>
-             </a>
+            </a>
         </div>
-    </nav>
-</header>
+    </nav> -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+        <a class="navbar-brand" routerLink="/customers">Customers App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <!-- <li class="nav-item active">
+              <a class="nav-link" routerLink="/customers">Home <span class="sr-only">(current)</span></a>
+            </li> -->
+          </ul>
+          <span class="navbar-text" *ngIf="isLoggedIn">
+            <span class="preferred-name">Welcome {{ (userSettings$ | async)?.preferredName }}!</span>
+            <a class="" routerLinkActive="active" (click)="logout()" data-cy="login-logout">Logout</a>
+            <a routerLink="/settings" class="p-2 settings">
+                <i class="fas fa-cog" aria-hidden="true"></i>
+            </a>
+          </span>
+        </div>
+        </div>
+      </nav>
+<!-- </header> -->
 
 <div class="container">
     <router-outlet></router-outlet>

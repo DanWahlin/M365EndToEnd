@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 
 import { CustomersService } from './customers/customers.service';
@@ -19,13 +20,16 @@ export class AppComponent implements OnInit, OnDestroy {
   customersLength$: Observable<number>;
   userSettings$: Observable<UserSettings>;
   subsink: SubSink = new SubSink();
+  isLoggedIn = false;
 
   constructor(@Inject(DOCUMENT) private document: HTMLDocument, 
+    private router: Router,
     private aadAuthService: AADAuthService,
     private userSettingsService: UserSettingsService) { }
 
   ngOnInit() {
     this.subsink.sink = this.aadAuthService.authChanged$.subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
       if (isLoggedIn) {
         this.userSettings$ = merge(
           this.userSettingsService.getUserSettings(),     // Get initial data
@@ -39,6 +43,17 @@ export class AppComponent implements OnInit, OnDestroy {
         );
       }
     });
+  }
+
+  logout() {
+    if (this.aadAuthService.loggedIn) {
+        this.aadAuthService.logout();
+    }
+    this.redirectToLogin();
+  }
+
+  redirectToLogin() {
+    this.router.navigate(['/login']);
   }
 
   updateTheme(userSettings: UserSettings) {      
