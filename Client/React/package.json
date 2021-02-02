@@ -1,0 +1,44 @@
+{
+  "name": "react-store",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "@codewithdan/observable-store": "^2.2.11",
+    "@codewithdan/observable-store-extensions": "^2.2.8",
+    "lodash.isequal": "^4.5.0",
+    "lodash.orderby": "^4.6.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.0",
+    "react-currency-formatter": "^1.1.0",
+    "react-dom": "^16.13.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.4.0",
+    "rxjs": "6.5.4"
+  },
+  "devDependencies": {
+    "prettier": "^1.19.1",
+    "react-app-rewire-aliases": "^0.2.0",
+    "react-app-rewired": "^2.1.5"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

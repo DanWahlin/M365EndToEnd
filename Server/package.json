@@ -1,0 +1,14 @@
+{
+  "name": "m365-end-to-end-api",
+  "version": "0.0.1",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "body-parser": "^1.19.0",
+    "opn": "^6.0.0"
+  },
+  "devDependencies": {}
+}

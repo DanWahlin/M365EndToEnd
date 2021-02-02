@@ -1,0 +1,71 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.8",
+  "version": "1.0.0",
+  "id": "efe57f82-7f13-495b-ac41-e5a51384e4ba",
+  "packageName": "com.microsoft.tailwind.customerorders",
+  "developer": {
+      "name": "Tailwind Traders",
+      "websiteUrl": "https://<CRM_HOST>:<CRM_PORT>",
+      "privacyUrl": "https://<CRM_HOST>:<CRM_PORT>",
+      "termsOfUseUrl": "https://<CRM_HOST>:<CRM_PORT>"
+  },
+  "icons": {
+      "color": "color.png",
+      "outline": "outline.png"
+  },
+  "name": {
+      "short": "Customer Orders",
+      "full": "Tailwind Traders Customer Orders"
+  },
+  "description": {
+      "short": "Sample application for Microsoft Teams",
+      "full": "Tailwind Traders Customer Orders and Bot"
+  },
+  "accentColor": "#FFFFFF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://<CRM_HOST>:<CRM_PORT>/teams-config",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team",
+        "groupchat"
+      ]
+    }
+  ],
+  "staticTabs": [
+    {
+      "entityId": "index",
+      "name": "Customer App",
+      "contentUrl": "https://<CRM_HOST>:<CRM_PORT>/tab",
+      "websiteUrl": "https://<CRM_HOST>:<CRM_PORT>/tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "bots": [
+      {
+          "botId": "<BOT_ID>",
+          "scopes": [
+              "personal",
+              "team",
+              "groupchat"
+          ],
+          "supportsFiles": false,
+          "isNotificationOnly": false
+      }
+  ],
+  "permissions": [
+      "identity",
+      "messageTeamMembers"
+  ],
+  "validDomains": [
+      "<CRM_HOST>:<CRM_PORT>",
+      "login.microsoftonline.com"
+  ],
+  "webApplicationInfo": {
+  "id": "<CRM_APPID>",
+  "resource": "api://<CRM_HOST>:<CRM_PORT>/<CRM_APPID>"
+  }
+}

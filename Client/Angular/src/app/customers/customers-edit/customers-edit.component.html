@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>{{ this.customerForm.controls.firstName.value }} {{ this.customerForm.controls.lastName.value }}</h1>
+  <form [formGroup]="customerForm" (ngSubmit)="submit()">
+    <div class="form-group">
+      <label for="name">Id</label>
+      <input type="text" class="form-control" formControlName="id" readonly />
+    </div>
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" class="form-control" formControlName="firstName" />
+      <div class="alert alert-danger" [hidden]="!customer || customerForm.controls.firstName.valid">First Name is required</div>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" class="form-control" formControlName="lastName" />
+      <div class="alert alert-danger" [hidden]="!customer || customerForm.controls.lastName.valid">Last Name is required</div>
+    </div>
+    <div class="form-group">
+      <label for="city">City</label>
+      <input type="text" class="form-control" formControlName="city" />
+      <div class="alert alert-danger" [hidden]="!customer || customerForm.controls.city.valid">City is required</div>
+    </div>
+    <button type="button" class="btn btn-danger" (click)="delete()" *ngIf="customer && customer.id">Delete</button>&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary" [disabled]="!customerForm.valid">Submit</button>
+  </form>
+  <br />
+  <a routerLink="/customers">View all customers</a>
+</div>
