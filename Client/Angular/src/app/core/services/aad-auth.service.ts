@@ -1,6 +1,6 @@
 import { Injectable, Output, EventEmitter, OnDestroy } from '@angular/core';
 
-import { Subscription } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { BroadcastService, MsalService } from '@azure/msal-angular';
 import { Logger, CryptoUtils } from 'msal';
 import { Router } from '@angular/router';
@@ -8,7 +8,9 @@ import { Router } from '@angular/router';
 @Injectable({ providedIn: 'root' })
 export class AADAuthService implements OnDestroy {
     redirectUrl: string;
-    subscriptions: Subscription[] = [];
+    private subscriptions: Subscription[] = [];
+    private authChangedSubject$: Subject<boolean> = new Subject<boolean>();
+    authChanged$ = this.authChangedSubject$.asObservable();
 
     isIframe = false;
     _loggedIn = false;
@@ -20,7 +22,7 @@ export class AADAuthService implements OnDestroy {
         this.userAuthChanged(val);
     }
 
-    @Output() authChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
+    // @Output() authChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     constructor(private broadcastService: BroadcastService,
         private router: Router,
@@ -30,7 +32,8 @@ export class AADAuthService implements OnDestroy {
     }
 
     private userAuthChanged(status: boolean) {
-        this.authChanged.emit(status); // Raise changed event
+        // this.authChanged.emit(status); // Raise changed event
+        this.authChangedSubject$.next(status);
     }
 
     init() {

@@ -5,7 +5,7 @@ import { CapitalizePipe } from './capitalize.pipe';
 
 @NgModule({
   imports: [ CommonModule, ReactiveFormsModule ],
-  exports: [ ReactiveFormsModule, CapitalizePipe ],
+  exports: [ CommonModule, ReactiveFormsModule, CapitalizePipe ],
   declarations: [ CapitalizePipe ]
 })
 export class SharedModule {}
