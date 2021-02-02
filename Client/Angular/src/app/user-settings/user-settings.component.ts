@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Theme } from '../shared/enums';
-import { UserSettingsService } from '../core/user-settings.service';
+import { UserSettingsService } from '../core/services/user-settings.service';
 import { UserSettings } from '../shared/interfaces';
 import { SubSink } from 'subsink';
 

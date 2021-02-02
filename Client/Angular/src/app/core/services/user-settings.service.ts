@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Theme, Actions } from '../shared/enums';
+import { Theme, Actions } from '../../shared/enums';
 import { ObservableStore } from '@codewithdan/observable-store';
-import { StoreState, UserSettings } from '../shared/interfaces';
+import { StoreState, UserSettings } from '../../shared/interfaces';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 

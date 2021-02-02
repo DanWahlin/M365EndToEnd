@@ -1,4 +1,6 @@
 export const environment = {
   production: true,
-  apiUrlBase: '/api'
+  appId: '',
+  authority: '',
+  botApiUrl: ''
 };

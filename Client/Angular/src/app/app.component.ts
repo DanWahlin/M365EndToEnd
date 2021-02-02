@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
 import { CustomersService } from './customers/customers.service';
-import { UserSettingsService } from './core/user-settings.service';
+import { UserSettingsService } from './core/services/user-settings.service';
 import { Theme } from './shared/enums';
 import { UserSettings } from './shared/interfaces';
 import { Observable, merge } from 'rxjs';

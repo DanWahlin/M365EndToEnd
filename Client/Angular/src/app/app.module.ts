@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
+import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
@@ -14,6 +15,7 @@ import { UserSettingsComponent } from './user-settings/user-settings.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    LoginModule,
     HttpClientModule,
     FormsModule,
     AppRoutingModule,

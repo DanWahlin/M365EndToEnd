@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { SorterService } from '../../core/sorter.service';
+import { SorterService } from '../../core/services/sorter.service';
 import { Customer } from '../../core/model/customer';
 
 @Component({
