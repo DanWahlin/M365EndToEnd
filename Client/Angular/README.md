@@ -1,6 +1,4 @@
-## Observable Store for Angular
-
-Open the `src/app/core/stores` folder for examples.
+## Angular App
 
 ## Running the Project
 
@@ -10,4 +8,6 @@ Open the `src/app/core/stores` folder for examples.
 
 1. Run `npm install` within this folder.
 
-1. Run `ng serve -o`
+1. Run `ng build`
+
+1. Go to the `Server` folder at the root of the project and follow the readme instructions to start the Node server (it will serve Angular + the API).
