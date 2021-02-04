@@ -6,14 +6,15 @@ const express   = require('express'),
     passport    = require('passport'),
     OIDCBearerStrategy = require('passport-azure-ad').BearerStrategy,
     app         = express(),     
-    customers   = JSON.parse(fs.readFileSync('data/customers.json', 'utf-8')),
-    orders      = JSON.parse(fs.readFileSync('data/orders.json', 'utf-8')),
-    states      = JSON.parse(fs.readFileSync('data/states.json', 'utf-8')),
-    userSettings = JSON.parse(fs.readFileSync('data/userSettings.json', 'utf-8')),
     inContainer = process.env.CONTAINER,
     inAzure = process.env.WEBSITE_RESOURCE_GROUP,
     ENV_FILE = path.join(__dirname, '.env'),
     port = process.env.PORT || 8080;
+
+let customers   = JSON.parse(fs.readFileSync('data/customers.json', 'utf-8')),
+    orders      = JSON.parse(fs.readFileSync('data/orders.json', 'utf-8')),
+    states      = JSON.parse(fs.readFileSync('data/states.json', 'utf-8')),
+    userSettings = JSON.parse(fs.readFileSync('data/userSettings.json', 'utf-8'));
 
 // Load ENV vars from .env file
 require('dotenv').config({ path: ENV_FILE });
