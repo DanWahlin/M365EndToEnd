@@ -28,21 +28,28 @@ export class AppComponent implements OnInit, OnDestroy {
     private userSettingsService: UserSettingsService) { }
 
   ngOnInit() {
+    this.isLoggedIn = this.aadAuthService.loggedIn;
+    this.getUserSettings();
+
     this.subsink.sink = this.aadAuthService.authChanged$.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
-      if (isLoggedIn) {
-        this.userSettings$ = merge(
-          this.userSettingsService.getUserSettings(),     // Get initial data
-          this.userSettingsService.userSettingsChanged()  // Handle any changes
-            .pipe(
-              // tap(userSettings => console.log('userSettingsChanged: ', userSettings)),
-              map(userSettings => {
-                return this.updateTheme(userSettings);
-              })
-            )
-        );
-      }
+      this.getUserSettings();
     });
+  }
+
+  getUserSettings() {
+    if (this.isLoggedIn) {
+      this.userSettings$ = merge(
+        this.userSettingsService.getUserSettings(),     // Get initial data
+        this.userSettingsService.userSettingsChanged()  // Handle any changes
+          .pipe(
+            // tap(userSettings => console.log('userSettingsChanged: ', userSettings)),
+            map(userSettings => {
+              return this.updateTheme(userSettings);
+            })
+          )
+      );
+    }
   }
 
   logout() {

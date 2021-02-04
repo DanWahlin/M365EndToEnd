@@ -1,4 +1,9 @@
 AppId=<your app ID here>
 AppPassword=<your app password here>
+tenantId=<your tenantId here>
+tenantName=<your tenant domain name in the AAD portal overview>
+
+TeamsAppId=efe57f82-7f13-495b-ac41-e5a51384e4ba
+TeamsEntityId=index
 
 isHttps=true
