@@ -5,6 +5,7 @@ import { SubSink } from 'subsink';
 import { Customer } from '../../core/model/customer';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomersService } from '../customers.service';
+import { ISalesPerson } from 'src/app/shared/interfaces';
 
 @Component({
   selector: 'app-customers-edit',
@@ -17,10 +18,12 @@ export class CustomersEditComponent implements OnInit, OnDestroy {
     id: [],
     firstName: [ '', Validators.required ],
     lastName: [ '', Validators.required ],
-    city: [ '', Validators.required ]
+    city: [ '', Validators.required ],
+    salesPersonId: [ '', Validators.required ]
   });
 
   customer: Customer;
+  salesPeople: ISalesPerson[];
   subsink = new SubSink();
 
   constructor(
@@ -30,6 +33,7 @@ export class CustomersEditComponent implements OnInit, OnDestroy {
       private route: ActivatedRoute) { }
 
   ngOnInit() {
+      this.customersService.getSalesPeople().subscribe((salesPeople: ISalesPerson[]) => this.salesPeople = salesPeople);
       const id = +this.route.snapshot.paramMap.get('id');
       this.subsink.sink = this.customersService.get(id).subscribe(customer => {
         if (customer) {

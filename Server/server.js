@@ -9,11 +9,12 @@ const express   = require('express'),
     inContainer = process.env.CONTAINER,
     inAzure = process.env.WEBSITE_RESOURCE_GROUP,
     ENV_FILE = path.join(__dirname, '.env'),
-    port = process.env.PORT || 8080;
+    port = process.env.PORT || 8443;
 
 let customers   = JSON.parse(fs.readFileSync('data/customers.json', 'utf-8')),
     orders      = JSON.parse(fs.readFileSync('data/orders.json', 'utf-8')),
     states      = JSON.parse(fs.readFileSync('data/states.json', 'utf-8')),
+    salesPeople = JSON.parse(fs.readFileSync('data/sales-people.json', 'utf-8')),
     userSettings = JSON.parse(fs.readFileSync('data/userSettings.json', 'utf-8'));
 
 // Load ENV vars from .env file
@@ -169,6 +170,10 @@ app.get('/api/orders/:id', authRoute(), (req, res) => {
 
 app.get('/api/states', authRoute(), (req, res) => {
     res.json(states);
+});
+
+app.get('/api/salesPeople', (req, res) => {
+    res.json(salesPeople);
 });
 
 app.post('/api/auth/login', (req, res) => {

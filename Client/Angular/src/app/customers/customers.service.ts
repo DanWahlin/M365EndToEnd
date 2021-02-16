@@ -4,6 +4,7 @@ import { of, Observable } from 'rxjs';
 import { map, catchError, switchMap } from 'rxjs/operators';
 
 import { Customer } from '../core/model';
+import { ISalesPerson } from '../shared/interfaces';
 
 @Injectable({
     providedIn: 'root'
@@ -11,6 +12,8 @@ import { Customer } from '../core/model';
 export class CustomersService {
 
     apiUrl = 'api/customers/';
+    salesPeopleApiUrl = 'api/salespeople';
+    salesPeople: ISalesPerson[];
 
     constructor(private http: HttpClient) { 
 
@@ -64,6 +67,22 @@ export class CustomersService {
             .pipe(
                 switchMap(() => {         
                     return this.getAll();
+                }),
+                catchError(this.handleError)
+            );
+    }
+
+    getSalesPeople(): Observable<ISalesPerson[]> {
+        // Cache check
+        if (this.salesPeople) {
+            return of(this.salesPeople);
+        }
+
+        return this.http.get<ISalesPerson[]>(this.salesPeopleApiUrl)
+            .pipe(
+                map(salesPeople => {
+                    this.salesPeople = salesPeople;
+                    return salesPeople;
                 }),
                 catchError(this.handleError)
             );
