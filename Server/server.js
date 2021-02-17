@@ -1,7 +1,10 @@
 "use strict";
 const express   = require('express'),
     bodyParser  = require('body-parser'),
+    https       = require('https'),
     fs          = require('fs'), 
+    fetch       = require("node-fetch"),
+    querystring = require("querystring"),
     path        = require('path'),
     passport    = require('passport'),
     OIDCBearerStrategy = require('passport-azure-ad').BearerStrategy,
@@ -9,7 +12,8 @@ const express   = require('express'),
     inContainer = process.env.CONTAINER,
     inAzure = process.env.WEBSITE_RESOURCE_GROUP,
     ENV_FILE = path.join(__dirname, '.env'),
-    port = process.env.PORT || 8443;
+    port = process.env.PORT || 8443,
+    domain = 'm365endtoend.local';
 
 let customers   = JSON.parse(fs.readFileSync('data/customers.json', 'utf-8')),
     orders      = JSON.parse(fs.readFileSync('data/orders.json', 'utf-8')),
@@ -38,9 +42,11 @@ if (!inContainer) {
     console.log(__dirname);
 }
 
+// Initialize Passport 
 app.use(passport.initialize()); // Starts passport
 app.use(passport.session()); // Provides session support
 
+// Initialize Passport AD
 // current owner
 let owner = null;
 const config = require('./config');
@@ -64,6 +70,18 @@ passport.use(bearerStrategy);
 function authRoute() {
     return passport.authenticate('oauth-bearer', { session: false });
 }
+
+// Pop-up dialog to ask for additional permissions, redirects to AAD page
+app.get('/authstart', (req, res) => {
+    var clientId = process.env.AppId;
+    res.render('auth-start', { clientId: clientId });
+});
+
+// End of the pop-up dialog auth flow, returns the results back to parent window
+app.get('/authend', (req, res) => {
+    var clientId = process.env.AppId;
+    res.render('auth-end', { clientId: clientId });
+}); 
 
 app.get('/api/userSettings', authRoute(), (req, res) => {
     // Return in memory userSettings
@@ -186,6 +204,53 @@ app.post('/api/auth/logout', authRoute(), (req, res) => {
     res.json(true);
 });
 
+// On-behalf-of token exchange
+app.post('/api/auth/token', function(req, res) {
+    var tid = req.body.tid;
+    var token = req.body.token;
+    var scopes = ["https://graph.microsoft.com/User.Read"];
+
+    var oboPromise = new Promise((resolve, reject) => {
+        const url = "https://login.microsoftonline.com/" + tid + "/oauth2/v2.0/token";
+        const params = {
+            client_id: process.env.AppId,
+            client_secret: process.env.AppPassword,
+            grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            assertion: token,
+            requested_token_use: "on_behalf_of",
+            scope: scopes.join(" ")
+        };
+    
+        fetch(url, {
+                method: "POST",
+                body: querystring.stringify(params),
+                headers: {
+                Accept: "application/json",
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        }).then(result => {
+            if (result.status !== 200) {
+                result.json().then(json => {
+                    // TODO: Check explicitly for invalid_grant or interaction_required
+                    reject({"error":json.error});
+                });
+            } else {
+                result.json().then(json => {
+                    console.log(json.access_token);
+                    resolve(json.access_token);
+                });
+            }
+        });
+    });
+
+    oboPromise.then(function(result) {
+        res.json(result);
+    }, function(err) {
+        console.log(err); // Error: "It broke"
+        res.json(err);
+    });
+});
+
 if (!inContainer) {
     // redirect all others to the index (HTML5 history)
     app.all('/*', function(req, res) {
@@ -193,7 +258,21 @@ if (!inContainer) {
     });
 }
 
-app.listen(port);
+var isHttps = (process.env.isHttps === 'true');
+console.log('HTTPS enabled: ' + isHttps);
+
+// HTTP
+if (!isHttps) {
+    app.listen(port);
+}
+else {
+    // HTTPS
+    var privateKey  = fs.readFileSync('.cert/cert.key', 'utf8');
+    var certificate = fs.readFileSync('.cert/cert.crt', 'utf8');
+    var credentials = {key: privateKey, cert: certificate};
+    var httpsServer = https.createServer(credentials, app);
+    httpsServer.listen(port, domain);
+}
 
 console.log('Express listening on port ' + port);
 

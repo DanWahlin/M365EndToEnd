@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 
 import { EnsureModuleLoadedOnceGuard } from './ensure-module-loaded-once.guard';
 import { MsalModule, MsalInterceptor } from '@azure/msal-angular';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 // Note that this won't work on mobile (iOS anyway) when in Teams
@@ -53,6 +54,11 @@ const url = `${window.location.protocol}//${window.location.hostname}${port}`;
   exports: [RouterModule, HttpClientModule],
   providers: [
     msalProviders,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
     { provide: 'Window', useFactory: () => window }
   ] // these should be singleton
 })

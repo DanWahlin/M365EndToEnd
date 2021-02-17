@@ -1,6 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import * as microsoftTeams from '@microsoft/teams-js';
 import { AADAuthService } from './aad-auth.service';
+import { SessionStorageService } from './storage.service';
 
 // Based on https://github.com/OfficeDev/msteams-tabs-sso-sample-nodejs/blob/master/src/static/scripts/ssoDemo.js
 // Most of the original code is left below (including using the fetch API) to keep it consistent with
@@ -13,7 +14,7 @@ export class TeamsAuthService {
     subEntityId: string;
     channelId: string;
 
-    constructor(private aadAuthService: AADAuthService) { }
+    constructor(private aadAuthService: AADAuthService, private sessionStorageService: SessionStorageService) { }
 
     teamsInitialized: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -66,9 +67,10 @@ export class TeamsAuthService {
             this.display("1. Get auth token from Microsoft Teams");
 
             microsoftTeams.authentication.getAuthToken({
-                successCallback: (result) => {
-                    this.display(result)
-                    resolve(result);
+                successCallback: (aadToken) => {
+                    this.sessionStorageService.setItem('token', aadToken);
+                    this.display(aadToken)
+                    resolve(aadToken);
                 },
                 failureCallback: function (error) {
                     reject("Error getting token: " + error);
@@ -182,6 +184,10 @@ export class TeamsAuthService {
     // Add text to the display in a <p> or other HTML element
     display(text) {
         console.log(text);
+    }
+
+    getToken() {
+        return this.sessionStorageService.getItem('token');
     }
 
 }
