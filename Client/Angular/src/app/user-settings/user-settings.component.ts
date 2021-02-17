@@ -26,6 +26,12 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
         this.selectedTheme = settings.theme;
       }
     });
+
+    this.subsink.sink = this.userSettingsService.stateChanged.subscribe(state => {
+      if (state && state.userSettings) {
+        this.selectedTheme = state.userSettings.theme;
+      }
+    });
   }
 
   updateUserSettings() {

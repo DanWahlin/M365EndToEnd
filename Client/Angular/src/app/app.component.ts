@@ -31,17 +31,18 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoggedIn = this.aadAuthService.loggedIn;
-    // this.getUserSettings();
+    this.getUserSettings();
 
     this.subsink.sink = this.aadAuthService.authChanged$.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
       this.getUserSettings();
     });
+
     this.subsink.sink = this.teamsAuthService.teamsInitialized
-    .subscribe((initialized: boolean) => {
-        this.teamsInitialized = initialized;
-        this.getUserSettings();
-    });
+      .subscribe((initialized: boolean) => {
+          this.teamsInitialized = initialized;
+          this.getUserSettings();
+      });
   }
 
   getUserSettings() {
