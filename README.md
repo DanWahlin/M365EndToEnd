@@ -34,7 +34,7 @@ From a technology standpoint, the application uses the following functionality:
 
 - [Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/?WT.mc_id=m365-11189-cxa) and [Microsoft Authentication Library](https://docs.microsoft.com/en-us/azure/active-directory/develop/msal-overview/?WT.mc_id=m365-11189-cxa) (MSAL) when the app runs outside of Teams
 - [Single Single-On](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso/?WT.mc_id=m365-11189-cxa) when the app runs inside of Teams
-- The [Teams JavaScript client SDK](https://docs.microsoft.com/en-us/javascript/api/overview/msteams-client?view=msteams-client-js-latest/?WT.mc_id=m365-11189-cxa)
+- The [Teams JavaScript client SDK](https://docs.microsoft.com/javascript/api/overview/msteams-client?view=msteams-client-js-latest%2F%3FWT.mc_id%3Dm365-11189-cxa&WT.mc_id=m365-0000-dwahlin)
 - Teams app [custom tab](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/what-are-tabs/?WT.mc_id=m365-11189-cxa)
 - [Bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots/?WT.mc_id=m365-11189-cxa) that leverages [LUIS and QnA Maker Azure Cognitive Services](https://docs.microsoft.com/en-us/azure/cognitive-services/what-are-cognitive-services/?WT.mc_id=m365-11189-cxa#language-apis)
 - App to Bot communication
@@ -52,7 +52,7 @@ To setup the application please follow the instructions in the [SETUP.md](SETUP.
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit [https://cla.opensource.microsoft.com](https://cla.opensource.microsoft.com/?WT.mc_id=m365-11189-cxa).
+the rights to use your contribution. For details, visit [https://cla.opensource.microsoft.com/?WT.mc_id=m365-0000-dwahlin](https://cla.opensource.microsoft.com/?WT.mc_id=m365-11189-cxa).
 
 When you submit a pull request, a CLA bot will automatically determine whether you need to provide
 a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
