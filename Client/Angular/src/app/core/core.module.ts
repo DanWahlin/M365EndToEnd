@@ -46,7 +46,8 @@ const url = `${window.location.protocol}//${window.location.hostname}${port}`;
         'profile',
       ],
       protectedResourceMap: [
-        ['https://graph.microsoft.com/v1.0/me', ['user.read']]
+        ['https://graph.microsoft.com/v1.0/me', ['user.read']],
+        ['https://learntogethercrm.ngrok.io/api/*', ['access_as_user']]
       ],
       extraQueryParameters: {}
     })

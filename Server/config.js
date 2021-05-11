@@ -15,7 +15,7 @@ const config = {
   
     // Required.
     // If you are using the common endpoint, you should either set `validateIssuer` to false, or provide a value for `issuer`.
-    validateIssuer: true,
+    validateIssuer: false,
   
     // Required. 
     // Set to true if you use `function(req, token, done)` as the verify callback.
@@ -35,8 +35,8 @@ const config = {
     // audience: 'api://learntogethercrm.ngrok.io/a80a2929-6ad8-4ba6-a605-ad137e63e9a6',
 
     // Needs this to work with MSAL (can supply a value of the AppId as well)
-    audience: null,
 
+    audience: ['a80a2929-6ad8-4ba6-a605-ad137e63e9a6', 'api://learntogethercrm.ngrok.io/a80a2929-6ad8-4ba6-a605-ad137e63e9a6'],
     // Required to set to true if you are using B2C tenant.
     isB2C: false,
 

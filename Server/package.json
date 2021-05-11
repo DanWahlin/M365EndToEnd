@@ -6,13 +6,15 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-handlebars": "^5.1.0",
+    "handlebars": "^4.7.7",
+    "msal": "^1.4.4",
+    "node-fetch": "^2.6.1",
     "opn": "^6.0.0",
     "passport": "0.4.1",
     "passport-azure-ad": "^4.3.0",
-    "dotenv": "^8.2.0",
-    "node-fetch": "^2.6.1",
     "querystring": "^0.2.1"
   },
   "devDependencies": {}

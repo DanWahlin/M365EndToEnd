@@ -45,7 +45,7 @@ export class AADAuthService implements OnDestroy {
         this.checkAccount();
 
         loginSuccessSubscription = this.broadcastService.subscribe('msal:loginSuccess', (token) => {
-            console.log(token?.idToken?.rawIdToken);
+            console.log(token);
             this.checkAccount();
             if (this.loggedIn) {
                 console.log('LOGIN SUCCESS!');

@@ -1,7 +1,7 @@
 "use strict";
 const express   = require('express'),
-    bodyParser  = require('body-parser'),
     https       = require('https'),
+    exphbs      = require('express-handlebars'),
     fs          = require('fs'), 
     fetch       = require("node-fetch"),
     querystring = require("querystring"),
@@ -24,8 +24,14 @@ let customers   = JSON.parse(fs.readFileSync('data/customers.json', 'utf-8')),
 // Load ENV vars from .env file
 require('dotenv').config({ path: ENV_FILE });
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+const hbs = exphbs.create({
+    extname: '.hbs'
+});
+app.engine('hbs', hbs.engine);
+app.set('view engine', 'hbs');
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 //CORS
 app.use(function(req, res, next) {
